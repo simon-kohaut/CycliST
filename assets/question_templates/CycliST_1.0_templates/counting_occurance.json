@@ -1,0 +1,176 @@
+[
+    {
+        "text": [
+            "How many objects are moving linearly or orbiting in the scene?",
+            "Count the number of objects that are changing their xy coordinates.",
+            "How many objects are moving across the scene?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_motion"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "How many objects are changing color in the scene?",
+            "What is the number of objects with color changes?",
+            "How many objects are performing color changes?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_change_color"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "How many objects are enlarging and shrinking in the scene?",
+			"Count the number of objects that enlarge and shrink.",
+			"What is the total number of objects undergoing size changes?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_enlarge"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "How many objects are orbiting in the scene?",
+			"Count the number of objects with orbiting motion.",
+			"How many objects move in an orbit in the scene?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_orbit"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "How many objects are rotating in the scene?",
+			"Determine the number of objects in rotation in the scene.",
+			"Count the objects that are rotating in the scene."
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_rotate"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "How many objects are moving in a straight line in the scene?",
+			"What is the total number of objects exhibiting linear motion in the scene?",
+			"How many objects are traveling in a straight path in the scene?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_linear"
+            },
+            {
+                "inputs": [
+                    1
+                ],
+                "type": "count"
+            }
+        ],
+        "params": [
+        ],
+        "constraints": [
+        ]
+    }
+]

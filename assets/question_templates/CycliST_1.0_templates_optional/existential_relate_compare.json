@@ -1,0 +1,767 @@
+[
+{
+    "text": [
+        "Is the size of the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> at any point?",
+        "Does the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> ever have the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "At some moment, do the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> and the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> have the same size?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; does it ever have the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is it ever the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is its size ever the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?"
+    ],
+    "nodes": [
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                0
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "side_inputs": [
+                "<R>",
+                "<Z2>",
+                "<C2>",
+                "<M2>",
+                "<CC2>",
+                "<E2>",
+                "<RO2>",
+                "<S2>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "relate_filter_unique_finally"
+        },
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z3>",
+                "<C3>",
+                "<M3>",
+                "<CC3>",
+                "<E3>",
+                "<RO3>",
+                "<S3>"
+            ],
+            "inputs": [
+                3
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2,
+                4
+            ],
+            "type": "equal_size_finally"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Relation",
+            "name": "<R>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z2>"
+        },
+        {
+            "type": "Color",
+            "name": "<C2>"
+        },
+        {
+            "type": "Material",
+            "name": "<M2>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC2>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E2>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S2>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO2>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z3>"
+        },
+        {
+            "type": "Color",
+            "name": "<C3>"
+        },
+        {
+            "type": "Material",
+            "name": "<M3>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC3>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E3>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S3>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO3>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                1,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                2,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                "<Z2>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<Z3>"
+            ],
+            "type": "NULL"
+        }
+    ]
+},
+{
+    "text": [
+        "Is the color of the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> at any point?",
+        "Does the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> ever have the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "At some moment, do the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> and the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> have the same size?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; does it ever have the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is it ever the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is its color ever the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?"
+    ],
+    "nodes": [
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                0
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "side_inputs": [
+                "<R>",
+                "<Z2>",
+                "<C2>",
+                "<M2>",
+                "<CC2>",
+                "<E2>",
+                "<RO2>",
+                "<S2>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "relate_filter_unique_finally"
+        },
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z3>",
+                "<C3>",
+                "<M3>",
+                "<CC3>",
+                "<E3>",
+                "<RO3>",
+                "<S3>"
+            ],
+            "inputs": [
+                3
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2,
+                4
+            ],
+            "type": "equal_color_finally"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Relation",
+            "name": "<R>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z2>"
+        },
+        {
+            "type": "Color",
+            "name": "<C2>"
+        },
+        {
+            "type": "Material",
+            "name": "<M2>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC2>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E2>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S2>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO2>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z3>"
+        },
+        {
+            "type": "Color",
+            "name": "<C3>"
+        },
+        {
+            "type": "Material",
+            "name": "<M3>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC3>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E3>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S3>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO3>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                2,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                "<C2>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<C3>"
+            ],
+            "type": "NULL"
+        }
+    ]
+},
+{
+    "text": [
+        "Is the size of the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> at all times?",
+        "Does the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> always have the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "Do the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> and the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> have the same size?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; does it constantly have the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is it perpetually the same size as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is its size continually the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?"
+    ],
+    "nodes": [
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                0
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "side_inputs": [
+                "<R>",
+                "<Z2>",
+                "<C2>",
+                "<M2>",
+                "<CC2>",
+                "<E2>",
+                "<RO2>",
+                "<S2>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "relate_filter_unique_finally"
+        },
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z3>",
+                "<C3>",
+                "<M3>",
+                "<CC3>",
+                "<E3>",
+                "<RO3>",
+                "<S3>"
+            ],
+            "inputs": [
+                3
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2,
+                4
+            ],
+            "type": "equal_size_globally"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Relation",
+            "name": "<R>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z2>"
+        },
+        {
+            "type": "Color",
+            "name": "<C2>"
+        },
+        {
+            "type": "Material",
+            "name": "<M2>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC2>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E2>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S2>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO2>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z3>"
+        },
+        {
+            "type": "Color",
+            "name": "<C3>"
+        },
+        {
+            "type": "Material",
+            "name": "<M3>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC3>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E3>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S3>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO3>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                1,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                2,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                "<Z2>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<Z3>"
+            ],
+            "type": "NULL"
+        }
+    ]
+},
+{
+    "text": [
+        "Is the color of the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> all the time?",
+        "Does the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> always have the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "At all times, do the <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S> and the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3> have the same size?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; does it always have the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is it constantly the same color as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?",
+        "There is a <Z2> <C2> <M2> <CC2> <RO2> <E2> <S2> [that is] ever <R> the <Z> <C> <M> <CC> <RO> <E> <S>; is its color continually the same as the <Z3> <C3> <M3> <CC3> <RO3> <E3> <S3>?"
+    ],
+    "nodes": [
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                0
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "side_inputs": [
+                "<R>",
+                "<Z2>",
+                "<C2>",
+                "<M2>",
+                "<CC2>",
+                "<E2>",
+                "<RO2>",
+                "<S2>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "relate_filter_unique_finally"
+        },
+        {
+            "inputs": [
+            ],
+            "type": "scene"
+        },
+        {
+            "side_inputs": [
+                "<Z3>",
+                "<C3>",
+                "<M3>",
+                "<CC3>",
+                "<E3>",
+                "<RO3>",
+                "<S3>"
+            ],
+            "inputs": [
+                3
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2,
+                4
+            ],
+            "type": "equal_color_globally"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Relation",
+            "name": "<R>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z2>"
+        },
+        {
+            "type": "Color",
+            "name": "<C2>"
+        },
+        {
+            "type": "Material",
+            "name": "<M2>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC2>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E2>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S2>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO2>"
+        },
+        {
+            "type": "Size",
+            "name": "<Z3>"
+        },
+        {
+            "type": "Color",
+            "name": "<C3>"
+        },
+        {
+            "type": "Material",
+            "name": "<M3>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC3>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E3>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S3>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO3>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                2,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                1,
+                4
+            ],
+            "type": "OUT_NEQ"
+        },
+        {
+            "params": [
+                "<C2>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<C3>"
+            ],
+            "type": "NULL"
+        }
+    ]
+}
+]

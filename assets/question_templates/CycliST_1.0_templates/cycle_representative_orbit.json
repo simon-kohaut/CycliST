@@ -1,0 +1,159 @@
+[
+	{
+        "text": [
+            "There is an orbiting <Z> <C> <M> <CC> <RO> <E> <S>. What is the size of the object it is orbiting around?",
+            "The <Z> <C> <M> <CC> <RO> <E> <S> is orbiting around a central object. What size is this central object?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_orbit"
+            },
+            {
+                "side_inputs": [
+                    "<Z>",
+                    "<C>",
+                    "<M>",
+					"<CC>",
+                    "<RO>",
+					"<E>",
+					"<S>"
+                ],
+                "inputs": [
+                    1
+                ],
+                "type": "filter_unique"
+            },
+            {
+                "inputs": [
+                    2
+                ],
+                "type": "query_orbit"
+            },
+			{
+                "inputs": [
+                    3
+                ],
+                "type": "query_size"
+            }
+			
+        ],
+        "params": [
+            {
+                "type": "Size",
+                "name": "<Z>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            },
+			{
+                "type": "change_color",
+                "name": "<CC>"
+            },
+			{
+                "type": "enlarge",
+                "name": "<E>"
+            },
+			{
+                "type": "Shape",
+                "name": "<S>"
+            },
+			{
+                "type": "rotate",
+                "name": "<RO>"
+            }
+        ],
+        "constraints": [
+        ]
+    },
+	{
+        "text": [
+            "There is an orbiting <Z> <C> <M> <CC> <RO> <E> <S>. What is the color of the object it is orbiting around?",
+            "The <Z> <C> <M> <CC> <RO> <E> <S> is orbiting around a central object. What color is this central object?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_orbit"
+            },
+            {
+                "side_inputs": [
+                    "<Z>",
+                    "<C>",
+                    "<M>",
+					"<CC>",
+					"<E>",
+					"<RO>",
+					"<S>"
+                ],
+                "inputs": [
+                    1
+                ],
+                "type": "filter_unique"
+            },
+            {
+                "inputs": [
+                    2
+                ],
+                "type": "query_orbit"
+            },
+			{
+                "inputs": [
+                    3
+                ],
+                "type": "query_color"
+            }
+			
+        ],
+        "params": [
+            {
+                "type": "Size",
+                "name": "<Z>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            },
+			{
+                "type": "change_color",
+                "name": "<CC>"
+            },
+			{
+                "type": "enlarge",
+                "name": "<E>"
+            },
+			{
+                "type": "Shape",
+                "name": "<S>"
+            },
+			{
+                "type": "rotate",
+                "name": "<RO>"
+            }
+        ],
+        "constraints": [
+        ]
+    }
+]
+

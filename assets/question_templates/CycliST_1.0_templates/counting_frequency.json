@@ -1,0 +1,362 @@
+[
+    {
+    "text": [
+        "There is a moving <Z> <C> <M> <CC> <RO> <E> <S>. What is its movement period in frames?",
+        "What is the movement period in frames of the moving <Z> <C> <M> <CC> <RO> <E> <S>?",
+        "What is the period of movement in frames for the <Z> <C> <M> <CC> <RO> <E> <S> in motion?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_motion"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_motion_period"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        }
+    ],
+    "constraints": [
+    ]
+},
+{
+    "text": [
+        "There is an orbiting <Z> <C> <M> <CC> <RO> <E> <S>. What is its orbit period in frames?",
+        "What is the orbit period in frames of the moving <Z> <C> <M> <CC> <RO> <E> <S>?",
+        "What is the period of the orbit in frames for the <Z> <C> <M> <CC> <RO> <E> <S> in motion?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_orbit"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_orbit_period"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        }
+    ],
+    "constraints": [
+    ]
+},
+{
+    "text": [
+        "There is <Z> <C> <M> <CC> <RO> <E> <S> object moving linearly back and forth. What is its period in frames for one round of back and forth?",
+        "What is the linear movement period in frames of the moving <Z> <C> <M> <CC> <RO> <E> <S> away from the start and back?",
+        "What is the period in frames for the <Z> <C> <M> <CC> <RO> <E> <S> moving back and forth on a line?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_linear"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_linear_period"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        }
+    ],
+    "constraints": [
+    ]
+},
+{
+    "text": [
+        "There is an orbiting <Z> <C> <M> <CC> <RO> <E> <S>. How many orbits does the object do in the video?",
+        "How often does the moving <Z> <C> <M> <CC> <RO> <E> <S>  orbit around its center?",
+        "How many orbits does the <Z> <C> <M> <CC> <RO> <E> <S> do in the video?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_orbit"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_orbit_passes"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        }
+    ],
+    "constraints": [
+    ]
+},
+{
+    "text": [
+        "There is an <Z> <C> <M> <CC> <RO> <E> <S> that moves back and forth. How often does the object go back and forth in the video?",
+        "How often does the <Z> <C> <M> <CC> <RO> <E> <S> moving linearly back and forth repeat?",
+        "How many times does the back and forth moving <Z> <C> <M> <CC> <RO> <E> <S> do in the video?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_linear"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<CC>",
+                "<E>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_linear_passes"
+        }
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        }
+    ],
+    "constraints": [
+    ]
+}
+]

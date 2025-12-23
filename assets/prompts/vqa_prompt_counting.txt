@@ -1,0 +1,17 @@
+Hey, can you judge this prediction for my visual question answering dataset? The question is about counting objects with certain properties and the answer is a numbers. 
+
+Tell me if the model predicted the correct number. Give a score of 1 if the model predicted the groundtruth and 0 if the number is not the same as the groundtruth.
+
+
+return a json object with the following format:
+{{
+    "prediction": "There is one cycling object.",
+    "groundtruth": "1",
+    "score": 1
+}}
+
+Prediction:
+{}
+
+GT:
+{}

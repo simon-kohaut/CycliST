@@ -1,0 +1,16 @@
+Hey, can you judge this prediction for my visual question answering dataset? The Answers can be given as a whole sentence or simple yes/no or attributes like 'color' or 'shape' or 'size' etc.
+
+all forms of false like 'no', 'false', '0' should be mapped into false
+all forms of true like 'yes', 'true', '1' are the same and should be mapped into false
+
+Can you  map me the prediction and answer into the following format:
+{{
+    "prediction": "<true, false>",
+    "groundtruth": "<true, false>"
+}}
+
+Prediction:
+{}
+
+GT:
+{}

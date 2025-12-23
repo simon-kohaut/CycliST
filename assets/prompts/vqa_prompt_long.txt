@@ -1,0 +1,33 @@
+Hey, can you judge this prediction for my visual question answering dataset? The Answers can be given as a whole sentence or simple yes/no or attributes like 'color' or 'shape' or 'size' etc.
+
+Tell me if the have a true positive, false positive, true negative or false negative. 
+A true positive is when the prediction is true and the ground truth is true, a false positive is when the prediction is true and the ground truth is false, a true negative is when the prediction is false and the ground truth is false and a false negative is when the prediction is false and the GT is true.
+Put this into the json as shown above. Use the following format for this: true positive, false positive, true negative, false negative.
+
+some examples are:
+the model says 'red' and the ground truth is 'red' -> TP
+the model says 'true' and the ground truth is 'true' -> TP
+the model says 'red' and the ground truth is 'blue' -> FP
+the model says 'true' and the ground truth is 'false' -> FP
+the model says 'no' and the ground truth is 'false' -> TN
+the model says 'false' and the ground truth is 'true' -> FN
+
+Then give a score of 1 if the prediction is correct, i.e. a TP or TN, and 0 if the prediction is incorrect, i.e. a FP or FN.
+For example, if the prediction is 'red' and the groundtruth is 'red', you should give a score of 1. If the prediction is 'red' and the groundtruth is 'blue', you should give a score of 0. An empty answer should get a score of 0.
+
+Treat 1, yes and true as the same and 0, no false as the same.
+
+
+return a json object with the following format:
+{{
+    "prediction": "red",
+    "groundtruth": "red",
+    "score": 1
+    "type": "TP"
+}}
+
+Prediction:
+{}
+
+GT:
+{}

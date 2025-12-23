@@ -1,0 +1,469 @@
+{
+  "dataset": "CycliST-v1.0",
+  "types": {
+    "Object": null,
+    "ObjectSet": null,
+    "Integer": null,
+    "Prime": null,
+    "Bool": null,
+    "enlarge_period": null,
+    "motion_period": null,
+    "color_period": null,
+    "orbit":["False"],
+    "linear": ["False","left","right"],
+    "enlarge": ["True", "False"],
+    "rotate": ["True", "False"],
+    "change_color": [
+      "False", "gray", "red", "blue", "green", "brown", "purple", "cyan", "yellow"
+    ],
+    "Shape": [
+      "cube", "sphere", "cylinder"
+    ],
+    "Color": [
+      "gray", "red", "blue", "green", "brown", "purple", "cyan", "yellow"
+    ],
+    "Relation": [
+      "left", "right", "behind", "front"
+    ],
+    "Size": [
+      "small", "large"
+    ],
+    "Material": [
+      "rubber", "metal"
+    ]
+  },
+  "functions": [
+    {
+      "name": "scene",
+      "inputs": [],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_color_universal",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Color"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_color_existential",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Color"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_shape",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Shape"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_size_globally",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_size_finally",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_material",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Material"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter_orbit",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Material"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "unique",
+      "inputs": ["ObjectSet"],
+      "output": "Object",
+      "terminal": false,
+      "properties": []
+    },
+    {
+      "name": "relate_universal",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "relate_existential",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "union",
+      "inputs": ["ObjectSet", "ObjectSet"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "except",
+      "inputs": ["ObjectSet", "ObjectSet"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "intersect",
+      "inputs": ["ObjectSet", "ObjectSet"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "count",
+      "inputs": ["ObjectSet"],
+      "output": "Integer",
+      "terminal": true
+    },
+    {
+      "name": "query_shape",
+      "inputs": ["Object"],
+      "output": "Shape",
+      "terminal": true
+    },
+    {
+      "name": "query_color",
+      "inputs": ["Object"],
+      "output": "Color",
+      "terminal": true
+    },
+    {
+      "name": "query_motion_period",
+      "inputs": ["Object"],
+      "output": "Prime",
+      "terminal": true
+    },
+    {
+      "name": "query_orbit_period",
+      "inputs": ["Object"],
+      "output": "Prime",
+      "terminal": true
+    },
+    {
+      "name": "query_linear_period",
+      "inputs": ["Object"],
+      "output": "Prime",
+      "terminal": true
+    },    
+    {
+      "name": "query_orbit_passes",
+      "inputs": ["Object"],
+      "output": "Integer",
+      "terminal": true
+    },
+    {
+      "name": "query_linear_passes",
+      "inputs": ["Object"],
+      "output": "Integer",
+      "terminal": true
+    },
+    {
+      "name": "query_color_initial",
+      "inputs": ["Object"],
+      "output": "Color",
+      "terminal": true
+    },
+    {
+      "name": "query_color_final",
+      "inputs": ["Object"],
+      "output": "Color",
+      "terminal": true
+    },
+    {
+      "name": "query_size",
+      "inputs": ["Object"],
+      "output": "Size",
+      "terminal": true
+    },
+    {
+      "name": "query_size_initial",
+      "inputs": ["Object"],
+      "output": "Size",
+      "terminal": true
+    },
+    {
+      "name": "query_size_final",
+      "inputs": ["Object"],
+      "output": "Size",
+      "terminal": true
+    },
+    {
+      "name": "query_material",
+      "inputs": ["Object"],
+      "output": "Material",
+      "terminal": true
+    },
+    {
+      "name": "exist",
+      "inputs": ["ObjectSet"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "logical_or",
+      "inputs": "Bool",
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "logical_and",
+      "inputs": "Bool",
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "logical_not",
+      "inputs": "Bool",
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "include",
+      "inputs": ["Object","ObjectSet"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_color",
+      "inputs": ["Color", "Color"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_color_existential",
+      "inputs": ["Object", "Object"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_color_universal",
+      "inputs": ["Object", "Object"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_size_existential",
+      "inputs": ["Object", "Object"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_size_universal",
+      "inputs": ["Object", "Object"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_shape",
+      "inputs": ["Shape", "Shape"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_integer",
+      "inputs": ["Integer", "Integer"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "less_than",
+      "inputs": ["Integer", "Integer"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "greater_than",
+      "inputs": ["Integer", "Integer"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_size",
+      "inputs": ["Size", "Size"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_material",
+      "inputs": ["Material", "Material"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "equal_object",
+      "inputs": ["Object", "Object"],
+      "output": "Bool",
+      "terminal": true
+    },
+    {
+      "name": "same_size",
+      "inputs": ["Object"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "same_color",
+      "inputs": ["Object"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "same_material",
+      "inputs": ["Object"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "same_shape",
+      "inputs": ["Object"],
+      "output": "ObjectSet",
+      "terminal": false
+    },
+    {
+      "name": "filter",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "ObjectSet",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "filter_unique",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size", "Color", "Material", "Shape"],
+      "output": "Object",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "filter_count",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size", "Color", "Material", "Shape"],
+      "output": "Integer",
+      "terminal": true,
+      "template_only": true
+    },
+    {
+      "name": "filter_exist",
+      "inputs": ["ObjectSet"],
+      "side_inputs": ["Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Bool",
+      "terminal": true,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape"],
+      "output": "ObjectSet",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_unique",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape"],
+      "output": "Object",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_count",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape"],
+      "output": "Integer",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_exist",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape"],
+      "output": "Bool",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_finally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape"],
+      "output": "ObjectSet",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_unique_finally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Object",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_count_finally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Integer",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_exist_finally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Bool",
+      "terminal": false,
+      "template_only": true
+    },
+       {
+      "name": "relate_filter_gloabally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "ObjectSet",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_unique_gloabally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Object",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_count_gloabally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Integer",
+      "terminal": false,
+      "template_only": true
+    },
+    {
+      "name": "relate_filter_exist_gloabally",
+      "inputs": ["Object"],
+      "side_inputs": ["Relation", "Size", "Color", "Material", "Shape", "change_color", "enlarge", "orbit"],
+      "output": "Bool",
+      "terminal": false,
+      "template_only": true
+    }
+  ]
+}
