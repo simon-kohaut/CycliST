@@ -22,7 +22,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="CycliST: A Video Language Model Benchmark for Reasoning on Cyclical State Transitions - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:published_time" content="2025-11-30T00:00:00.000Z">
   <meta property="article:author" content="Simon Kohaut">
   <meta property="article:section" content="Research">
   <meta property="article:tag" content="Video Question Answering">
@@ -115,7 +115,7 @@
       "name": "arXiv"
     },
     "url": "https://huggingface.co/datasets/AIML-TUDA/CycliST",
-    "image": "https://github.com/simon-kohaut/CycliST/blob/main/docs/static/images/architecture.jpg",
+    "image": "https://github.com/simon-kohaut/CycliST/blob/main/docs/static/images/architecture.jpg?raw=true",
     "keywords": ["Video Question Answering", "Scene Understanding", "Spatio-Temporal Reasoning", "Benchmark Dataset"],
     "abstract": "We present CycliST, a novel benchmark dataset designed to evaluate Video Language Models (VLM) on their ability for textual reasoning over cyclical state transitions. CycliST captures fundamental aspects of real-world processes by generating synthetic, richly structured video sequences featuring periodic patterns in object motion and visual attributes. CycliST employs a tiered evaluation system that progressively increases difficulty through variations in the number of cyclic objects, scene clutter, and lighting conditions, challenging state-of-the-art models on their spatio-temporal cognition. We conduct extensive experiments with current state-of-the-art VLMs, both open-source and proprietary, and reveal their limitations in generalizing to cyclical dynamics such as linear and orbital motion, as well as time-dependent changes in visual attributes like color and scale. Our results demonstrate that present-day VLMs struggle to reliably detect and exploit cyclic patterns, lack a notion of temporal understanding, and are unable to extract quantitative insights from scenes, such as the number of objects in motion, highlighting a significant technical gap that needs to be addressed. More specifically, we find no single model consistently leads in performance: neither size nor architecture correlates strongly with outcomes, and no model succeeds equally well across all tasks. By providing a targeted challenge and a comprehensive evaluation framework, CycliST paves the way for visual reasoning models that surpass the state-of-the-art in understanding periodic patterns.",
     "citation": "@misc{kohaut2025cyclistvideolanguagemodel,
@@ -328,29 +328,24 @@
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
-        <!-- TODO: Replace with your research result images -->
         <img src="static/images/architecture.jpg" alt="CycliST architecture" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
         <h2 class="subtitle has-text-centered">
           CycliST's architecture.
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="static/images/cycle_functions.jpg" alt="Cycle functions" loading="lazy"/>
         <h2 class="subtitle has-text-centered">
           Time dynamic objects in CycliST.
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="static/images/spatial_cycles.jpg" alt="Spatial cycles" loading="lazy"/>
         <h2 class="subtitle has-text-centered">
           CycliST's motion cycles lead to varied and periodic spatial relations. 
        </h2>
      </div>
      <div class="item">
-      <!-- Your image here -->
       <img src="static/images/vqa_pipeline.jpg" alt="VQA pipeline" loading="lazy"/>
       <h2 class="subtitle has-text-centered">
         CycliST's question generation pipelines for existential and universal temporal descriptive VQA.
@@ -369,37 +364,27 @@
       <h2 class="title is-3">CycliST's tiered benchmarking: Unicycle, Unicycle-cluttered, Bicycle, Tricycle, and Nightrider</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
           <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
             <source src="static/videos/unicycle.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
           <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
             <source src="static/videos/unicycle_cluttered.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
           <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
             <source src="static/videos/bycicle.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
           <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
             <source src="static/videos/tricycle.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-video4">
-          <!-- TODO: Add poster image for better preview -->
           <video poster="" id="video4" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
             <source src="static/videos/nightrider.mp4" type="video/mp4">
           </video>
         </div>
