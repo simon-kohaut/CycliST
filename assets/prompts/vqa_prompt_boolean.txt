@@ -1,0 +1,38 @@
+Hey, can you parse my answer for my Visual question answering dataset? The question is about answering questions about objects and the answer is either true or false. 
+
+The answer can be a sentence or just a simple yes, no etc. In the "prediction" field put the long answer. In the "pred" field map the long answer to either true or false.
+Ignore the groundtruth to make you mapping of the Prediction to the json.
+
+return a json object with the following format:
+
+{{
+    "prediction": "Yes, at some point, the size of the brown Sphere becomes small.",
+    "pred":"true"
+    "groundtruth": "true"
+}}
+
+Here is another example:
+
+{{
+    "prediction": "No, the big Cone is consistently colored teal throughout the sequence.",
+    "pred":"false"
+    "groundtruth": "true"
+}}
+
+
+Sometimes the prediction is not definite, so we can not map a true or false. In those cases we map the prediction short field to "2".
+Here is one example for such as case:
+
+{{
+    "prediction": "I am not sure about this.",
+    "pred":2
+    "groundtruth": "true"
+}}
+
+
+
+Prediction:
+{}
+
+groundtruth:
+{}
