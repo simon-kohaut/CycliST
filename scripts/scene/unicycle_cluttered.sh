@@ -12,10 +12,10 @@ do
         echo "Split: $split, Size: $split_size, Cycles: 1x${cycle}"
         python -m cyclist.cyclist \
             --device CUDA \
-            --split unicycle_"$split" \
+            --split unicycle_cluttered_"$split" \
             --number_of_videos $split_size \
-            --min_number_of_clutter_objects 2 \
-            --max_number_of_clutter_objects 3 \
+            --min_number_of_clutter_objects 4 \
+            --max_number_of_clutter_objects 9 \
             --number_of_"$cycle"_cycles 1 \
             --force_generation
     done

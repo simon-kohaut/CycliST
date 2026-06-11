@@ -1,0 +1,75 @@
+[
+	{
+        "text": [
+            "There is an orbiting <Z> <C> <M> <CC> <RO> <E> <S>. In which clock direction is it orbiting?",
+            "The <Z> <C> <M> <CC> <RO> <E> <S> is orbiting around a central object. Is the object orbiting clockwise or counterclockwise?"
+        ],
+        "nodes": [
+            {
+                "inputs": [],
+                "type": "scene"
+            },
+            {
+                "inputs": [
+                    0
+                ],
+                "type": "filter_orbit"
+            },
+            {
+                "side_inputs": [
+                    "<Z>",
+                    "<C>",
+                    "<M>",
+					"<CC>",
+                    "<RO>",
+					"<E>",
+					"<S>"
+                ],
+                "inputs": [
+                    1
+                ],
+                "type": "filter_unique"
+            },
+            {
+                "inputs": [
+                    2
+                ],
+                "type": "query_orbit_direction"
+            }
+			
+        ],
+        "params": [
+            {
+                "type": "Size",
+                "name": "<Z>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            },
+			{
+                "type": "change_color",
+                "name": "<CC>"
+            },
+			{
+                "type": "enlarge",
+                "name": "<E>"
+            },
+			{
+                "type": "Shape",
+                "name": "<S>"
+            },
+			{
+                "type": "rotate",
+                "name": "<RO>"
+            }
+        ],
+        "constraints": [
+        ]
+    }
+]
+
