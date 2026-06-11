@@ -95,6 +95,7 @@ execute_handlers = {
   'query_size_final': query_size_final, # ask about the size of an object it is changing into
   
   'query_orbit': make_query_handler('orbit'), # asks about an object which is orbited
+  'query_orbit_direction': make_query_handler('orbit_direction'),
 
 
   #query cyclic periods and passes

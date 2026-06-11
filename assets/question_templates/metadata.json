@@ -10,6 +10,7 @@
     "motion_period": null,
     "color_period": null,
     "orbit":["False"],
+    "orbit_direction": ["clockwise", "counterclockwise"],
     "linear": ["False","left","right"],
     "enlarge": ["True", "False"],
     "rotate": ["True", "False"],
@@ -143,6 +144,12 @@
       "name": "query_color",
       "inputs": ["Object"],
       "output": "Color",
+      "terminal": true
+    },
+    {
+      "name": "query_orbit_direction",
+      "inputs": ["Object"],
+      "output": "orbit_direction",
       "terminal": true
     },
     {
