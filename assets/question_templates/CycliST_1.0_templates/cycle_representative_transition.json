@@ -1,0 +1,353 @@
+[
+    {
+    "text": [
+        
+        "A <Z> <C> <M> <CC> <RO> <E> <S> is changing its color periodically. What is the initial color of the object before it changes?",
+        "A <Z> <C> <M> <CC> <RO> <E> <S> changes color at regular intervals. What is the object's original color before it starts changing?",
+        "The <Z> <C> <M> <CC> <RO> <E> <S> that undergoes periodic color changes. What is the initial color of the object before it transitions?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_change_color"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<E>",
+                "<CC>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_color_initial"
+        }
+        
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                "<C>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<CC>"
+            ],
+            "type": "NULL"
+        }
+
+    ]
+},
+{
+    "text": [
+        
+        "A <Z> <C> <M> <CC> <RO> <E> <S> is changing color periodically. What is the color it changes into?",
+        "A <Z> <C> <M> <CC> <RO> <E> <S> changes color at regular intervals. What color does the object turn into after changing?",
+        "The <Z> <C> <M> <CC> <RO> <E> <S> that undergoes periodic color changes. What is the color it transitions into?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_change_color"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<E>",
+                "<CC>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_color_final"
+        }
+        
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                "<C>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<CC>"
+            ],
+            "type": "NULL"
+        }
+
+    ]
+},
+{
+    "text": [
+        
+        "A <Z> <C> <M> <CC> <RO> <E> <S> is changing its size periodically. What is the initial size of the object before it changes?",
+        "A <Z> <C> <M> <CC> <RO> <E> <S> resizes at regular intervals. What is the object's original size before it starts changing?",
+        "The <Z> <C> <M> <CC> <RO> <E> <S> that undergoes periodic changes in size. What is the initial size of the object before it transitions?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_enlarge"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<E>",
+                "<CC>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_size_initial"
+        }
+        
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                "<Z>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<E>"
+            ],
+            "type": "NULL"
+        }
+
+    ]
+},
+{
+    "text": [
+        "A <Z> <C> <M> <CC> <RO> <E> <S> is changing its size periodically. What is the size it changes into?",
+        "A <Z> <C> <M> <CC> <RO> <E> <S> resizes at regular intervals. What size does the object change into after its initial size?",
+        "The <Z> <C> <M> <CC> <RO> <E> <S> that undergoes periodic sizes changes. What is the size it transitions into?"
+    ],
+    "nodes": [
+        {
+            "inputs": [],
+            "type": "scene"
+        },
+        {
+            "inputs": [
+                0
+            ],
+            "type": "filter_enlarge"
+        },
+        {
+            "side_inputs": [
+                "<Z>",
+                "<C>",
+                "<M>",
+                "<E>",
+                "<CC>",
+                "<RO>",
+                "<S>"
+            ],
+            "inputs": [
+                1
+            ],
+            "type": "filter_unique"
+        },
+        {
+            "inputs": [
+                2
+            ],
+            "type": "query_size_final"
+        }
+        
+    ],
+    "params": [
+        {
+            "type": "Size",
+            "name": "<Z>"
+        },
+        {
+            "type": "Color",
+            "name": "<C>"
+        },
+
+        {
+            "type": "Material",
+            "name": "<M>"
+        },
+        {
+            "type": "change_color",
+            "name": "<CC>"
+        },
+        {
+            "type": "enlarge",
+            "name": "<E>"
+        },
+        {
+            "type": "rotate",
+            "name": "<RO>"
+        },
+        {
+            "type": "Shape",
+            "name": "<S>"
+        }
+    ],
+    "constraints": [
+        {
+            "params": [
+                "<Z>"
+            ],
+            "type": "NULL"
+        },
+        {
+            "params": [
+                "<E>"
+            ],
+            "type": "NULL"
+        }
+
+    ]
+}
+]
