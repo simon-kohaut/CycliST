@@ -1,0 +1,83 @@
+# Scene Description Evaluation Judge
+
+You are an expert extractor tasked with analyzing scene descriptions.
+Your goal is to map if possible all objects and their cyclic movement mentioned in a free-text description to a json.
+
+## Input Format
+
+You will receive:
+**Scene Description**: Free-text description of the scene
+
+## Task
+**Object Identification**: Extract all objects mentioned in the scene description and map them into the mapped_objects field in the json file.
+
+
+## Output Format
+
+Provide your analysis in the following JSON structure:
+
+```json
+{{
+  "mapped_objects": [
+    {{
+      "description_reference": "string describing how object was mentioned in text",
+      "mesh": "cube|sphere|cylinder|cone|not_mentioned",
+      "material": "rubber|metal|not_mentioned",
+      "size": "small|large|medium|not_mentioned",
+      "color": "gray|red|blue|green|brown|purple|cyan|yellow|not_mentioned",
+      "linear": "true|not_mentioned",
+      "orbit": "true|not_mentioned",
+      "rotate": "true|not_mentioned",
+      "resize": "true|not_mentioned",
+      "recolor": "true|not_mentioned"
+      }}
+  ]
+}}
+```
+
+The cyclic motions correspond to the following fields in the json:
+- **linear**: Object moving in straight line, translating, sliding
+- **orbit**: Object moving in circular path around another object or point
+- **rotate**: Object spinning/rotating in place
+- **resize**: Object growing, shrinking, changing size
+- **recolor**: Object changing color
+
+Note that the only possible colors are gray, red, blue, green, brown, purple, cyan, yellow.
+Sometimes a model predicts for example black. In that case put gray instead of black in the json!
+Other examples (not only colors are):
+gray instead of black or white
+gray and metal instead of silver
+blue instead of dark blue
+yellow and metal instead of golden
+metal instead reflective surface or shiny
+sphere instead of ball
+cyan instead of teal
+rubber instead of matte
+cube instead of rectangular prism
+
+orbit instead of move around it
+orbit instead of rotates clockwise - only if clockwise or counter clockwise is present
+rotate instead of rotates around its axis
+resize instead of bouncing
+
+
+## Analysis Process
+
+1. Parse the scene description and identify all object references
+2. For each described object:
+   - Extract mentioned properties (shape, color, size, material)
+   - Extract mentioned motions/cycles
+
+
+##IMPORTANT
+do not use comments // in the json!
+Sometimes there can be no objects to describe as the free from description is just random giberisch. In that case do not map anything and return an empty mapped_objects list []
+If the models says "two red cones" also add the mentioned object twice to the list
+Do not put false into the cycles, put not_mentioned if its is not true!!!
+
+DO IT CAREFULLY AND CHECK THE NOTES AND IMPORTANT PARTS!
+
+Begin your evaluation now.
+
+Free form description:
+{}

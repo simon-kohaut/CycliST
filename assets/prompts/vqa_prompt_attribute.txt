@@ -1,0 +1,55 @@
+Hey, can you parse my answer for my visual question answering dataset? The question is about answering questions about objects and the answer is either a color, attribute or wherever an object is orbiting clockwise our counterclockwise. 
+
+The answer can be a sentence or just a simple answer like "It is red" or just "red" etc. In the "prediction" field put the long answer. In the "pred" field map the long answer to one of the following:
+
+Attributes: "gray",, "red", "blue", "green", "brown", "purple", "cyan", "yellow"
+Sizes: "small", "large"
+Rotation: "clockwise", "counterclockwise"
+
+Also if the colors do not match one of the given values above you can still match them if they are similar. For example put cycan if the answer is "The color is teal".
+
+Sometimes the answer is correct and matches the groundtruth but sometimes it is not. Ignore the groundtruth to make you mapping of the Prediction to the json. 
+
+
+
+return a json object with the following format:
+
+{{
+    "prediction": "The object changes into a larger size.",
+    "pred":"large",
+    "groundtruth": "small"
+}}
+
+Here is another example:
+
+{{
+    "prediction": The object is orbiting in a clockwise direction.",
+    "pred":"clockwise",
+    "groundtruth": "clockwise"
+}}
+
+
+And another one:
+{{
+    "prediction": The red object is orbiting around a purple sphere.",
+    "pred":"purple",
+    "groundtruth": "blue"
+}}
+
+
+Sometimes the prediction is not definite, so we can not map a true or false. In those cases we map the prediction short field to "undetermined".
+Here is one example for such as case:
+
+{{
+    "prediction": "It is difficult to determine whether the object is orbiting clockwise or counterclockwise without observing the movement of the object.",
+    "pred":"undetermined",
+    "groundtruth": "true"
+}}
+
+
+
+Prediction:
+{}
+
+groundtruth:
+{}
