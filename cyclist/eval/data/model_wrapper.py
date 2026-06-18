@@ -13,8 +13,9 @@ from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
 from llava.conversation import conv_templates
 import google.genai as genai
 
-from eval.utils.internvl_conversation import get_conv_template
-from eval.utils.intern_video_utils import load_video
+from cyclist.eval.utils.internvl_conversation import get_conv_template
+from cyclist.eval.utils.intern_video_utils import load_video, split_model
+
 
 
 def load_model(model_id, device='cuda'):
@@ -52,11 +53,15 @@ class BaseModelWrapper(ABC):
 class OneVisionModelWrapper(BaseModelWrapper):
     def __init__(self, model_id, device='cuda'):
         super().__init__(model_id, device)
+        # "auto" splits 72B across GPUs; single-device map prevents the
+        # cache_position/causal_mask device mismatch for smaller models.
+        device_map = "auto" if "72b" in model_id.lower() else {"": torch.cuda.current_device()}
         self.model = LlavaOnevisionForConditionalGeneration.from_pretrained(
             model_id,
             torch_dtype=torch.float16,
             low_cpu_mem_usage=True,
-            device_map='auto'
+            device_map=device_map,
+            attn_implementation="flash_attention_2"
         )
         self.processor = AutoProcessor.from_pretrained(model_id)
         self.processor.tokenizer.padding_side = "left"
@@ -99,7 +104,8 @@ class LlavaVideoModelWrapper(BaseModelWrapper):
         super().__init__(model_id, device)
         model_name = "llava_qwen"
         tokenizer, model, image_processor, max_length = load_pretrained_model(
-            model_id, None, model_name, torch_dtype="bfloat16", device_map="auto"
+            model_id, None, model_name, torch_dtype="bfloat16", device_map="auto",
+            attn_implementation="flash_attention_2"
         )
         self.tokenizer = tokenizer
         self.model = model
@@ -107,7 +113,8 @@ class LlavaVideoModelWrapper(BaseModelWrapper):
         self.max_length = max_length
 
     def prepare_inputs(self, videos, queries, video_time, frame_times):
-        videos = [self.image_processor.preprocess(video, return_tensors="pt")["pixel_values"].cuda().bfloat16() for video in videos]
+        device = next(iter(self.model.parameters())).device
+        videos = [self.image_processor.preprocess(video, return_tensors="pt")["pixel_values"].to(device).bfloat16() for video in videos]
 
         prompts = []
         for vidx, video in enumerate(videos):
@@ -119,8 +126,7 @@ class LlavaVideoModelWrapper(BaseModelWrapper):
             conv.append_message(conv.roles[1], None)
             prompts.append(conv.get_prompt())
 
-        device_type = next(iter(self.model.parameters())).device.type
-        input_ids = [tokenizer_image_token(p, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(device_type) for p in prompts]
+        input_ids = [tokenizer_image_token(p, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(device) for p in prompts]
 
         max_shape = max([i.shape[1] for i in input_ids])
         input_ids_padded = torch.ones(len(input_ids), max_shape, dtype=torch.long) * self.tokenizer.pad_token_id
@@ -144,7 +150,16 @@ class InternModelWrapper(BaseModelWrapper):
     def __init__(self, model_id, device='cuda'):
         super().__init__(model_id, device)
         self.tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
-        self.model = AutoModel.from_pretrained(model_id, trust_remote_code=True).half().cuda().to(torch.bfloat16)
+        if "InternVL3-78B" in model_id:
+            self.model = AutoModel.from_pretrained(
+                model_id, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True,
+                use_flash_attn=True, trust_remote_code=True,
+                device_map=split_model(model_id)
+            ).eval()
+        else:
+            self.model = AutoModel.from_pretrained(
+                model_id, trust_remote_code=True, use_flash_attn=True
+            ).half().cuda().to(torch.bfloat16)
         self.IMG_START_TOKEN = '<img>'
         self.IMG_END_TOKEN = '</img>'
         self.IMG_CONTEXT_TOKEN = '<IMG_CONTEXT>'

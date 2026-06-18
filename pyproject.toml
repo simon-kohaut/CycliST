@@ -1,73 +1,79 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]  # Build dependencies
+requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cyclist"  
-version = "0.1.0"  
-description = "A CLEVR Video dataset for cyclic transformations."
-
+name = "cyclist"
+version = "1.0"
+description = "CycliST: A Video Language Model Benchmark for Reasoning on Cyclical State Transitions"
 readme = "README.md"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Simon Kohaut, Daniel Ochs, Shun Zhang", email = "simon.kohaut@cs.tu-darmstadt.de" }
 ]
-license = { text = "MIT" }  # Replace with your license type
-requires-python = ">=3.6"  # Specify the minimum Python version required
+license = { text = "BSD-3-Clause" }
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: BSD Software License",
     "Operating System :: OS Independent",
 ]
 
+# Scene generation and question generation
 dependencies = [
-    # Core dependencies required for the package to function
-    "torch==2.5.1",
-    "torchvision==0.20.1",
-    "torchaudio==2.5.1",
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "opencv-python",
+    "python-dotenv",
+    "rtpt",
+    "tqdm",
+    "matplotlib",
+    "networkx",
+]
+
+[project.optional-dependencies]
+
+# VLM forward pass (eval_vqa.py) and SGLang judging (judge_vqa.py)
+# Also installs API clients: google-genai for Gemini, openai as the SGLang HTTP client
+# torch/torchvision/torchaudio are intentionally omitted here — install them first
+# with the correct CUDA index URL (see environment.yml or install_packages.sh)
+eval = [
     "transformers==4.48.3",
-    #"peft",#==0.11.1
     "tokenizers",
     "evaluate",
     "sentencepiece",
     "shortuuid",
     "bitsandbytes",
-    "pydantic", 
+    "accelerate",
+    "peft",
+    "Pillow",
     "markdown2[all]",
-    "numpy",
-    'av',
-    'python-dotenv',
-    'wandb',
-]
-
-[project.optional-dependencies]
-# Optional groups of dependencies
-
-advanced_ml = [
-    # Advanced ML tools and libraries
+    "av",
+    "requests",
+    "wandb",
+    "pandas",
+    "seaborn",
+    "google-genai",
+    "openai",
     "einops==0.6.1",
     "einops-exts==0.0.4",
-    "timm==0.6.13", 
-    "deepspeed",
-    "accelerate", 
-    "flash-attn",
+    "timm>=0.9.2",
 ]
 
-api = [
-    # Google generative AI tools
-    'google-genai',
-    'openai'
+# Development and testing tools
+dev = [
+    "black",
+    "ruff",
+    "hypothesis",
+    "pytest",
+    "pytest-cov",
 ]
-
-sglang = [
-    # SGLang runtime and development tools
-    "sglang[all]==0.4.1",
-    #'flashinfer-python @ https://flashinfer.ai/whl/cu124/torch2.5/',
-]
-
 
 [tool.setuptools.packages.find]
-where = ["cyclist"]  # Adjust if your package is in a different directory (e.g., 'src')
+where = ["."]
 
 [tool.setuptools]
-include-package-data = true  # Include additional files specified in MANIFEST.in
+include-package-data = true
 
+[tool.setuptools.package-data]
+cyclist = ["py.typed"]

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from torch.utils.data import Dataset
-from eval.data.load_vid import read_video_pyav
+from cyclist.eval.data.load_vid import read_video_pyav
 
 
 class CyListVQADataset(Dataset):

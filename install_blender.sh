@@ -1,13 +1,16 @@
-apt-get update
+#!/usr/bin/env bash
+set -euo pipefail
 
-apt install software-properties-common
-apt-get update
+BLENDER_VERSION="4.0.1"
+BLENDER_INSTALL_DIR="/opt/blender"
+BLENDER_URL="https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.0/blender-${BLENDER_VERSION}-linux-x64.tar.xz"
 
-
-add-apt-repository ppa:savoury1/blender
-apt-get update
-
-apt-get update && apt-get install -y --no-install-recommends \
+# --- System dependencies ---
+apt-get update -qq
+apt-get install -y --no-install-recommends software-properties-common
+add-apt-repository -y ppa:savoury1/blender
+apt-get update -qq
+apt-get install -y --no-install-recommends \
     wget \
     libxrender1 \
     libxrandr2 \
@@ -21,13 +24,28 @@ apt-get update && apt-get install -y --no-install-recommends \
     libxkbcommon-x11-0 \
     libsm6 \
     libegl1 \
-    libegl-mesa0 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libegl-mesa0
+apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# --- Download and install Blender ---
+echo "Downloading Blender ${BLENDER_VERSION}..."
+wget -q "${BLENDER_URL}" -O /tmp/blender.tar.xz
+mkdir -p "${BLENDER_INSTALL_DIR}"
+tar -xf /tmp/blender.tar.xz -C "${BLENDER_INSTALL_DIR}" --strip-components=1
+rm /tmp/blender.tar.xz
+echo "Blender installed to ${BLENDER_INSTALL_DIR}"
 
-wget https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.0/blender-4.0.1-linux-x64.tar.xz -O /tmp/blender.tar.xz
-mkdir -p /opt/blender && tar -xf /tmp/blender.tar.xz -C /opt/blender --strip-components=1 && rm /tmp/blender.tar.xz
-PATH="/opt/blender:$PATH"
+# Add Blender to PATH for the current session and persistently
+export PATH="${BLENDER_INSTALL_DIR}:${PATH}"
+if ! grep -q "${BLENDER_INSTALL_DIR}" "${HOME}/.bashrc" 2>/dev/null; then
+    echo "export PATH=\"${BLENDER_INSTALL_DIR}:\${PATH}\"" >> "${HOME}/.bashrc"
+    echo "Added Blender to PATH in ~/.bashrc — run 'source ~/.bashrc' or open a new shell"
+fi
 
+# --- Register cyclist package with Blender's bundled Python ---
+# This allows renderer.py to import cyclist when called from within Blender
+PTH_FILE="${BLENDER_INSTALL_DIR}/4.0/python/lib/python3.10/site-packages/cyclist.pth"
+echo "${PWD}" >> "${PTH_FILE}"
+echo "Registered ${PWD} in Blender's Python path at ${PTH_FILE}"
 
-echo $PWD >> /opt/blender/4.0/python/lib/python3.10/site-packages/cyclist.pth
+echo "Done. Verify with: blender --version"

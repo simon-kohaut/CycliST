@@ -4,7 +4,7 @@ base_path="$(cd "$(dirname "$0")/../.." && pwd)"
 
 MODEL_PARAM=1
 DATASET_PARAM="unicycle"
-FPS_PARAM=8
+FPS_PARAM=32
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -51,12 +51,14 @@ do
         EXP_NAME="${template}_${DATASET_PARAM}_${FPS_PARAM}sf"
 
         echo "Template: $template"
-        python3 "$base_path/cyclist/eval/eval_vqa.py" \
+        python3 -m cyclist.eval.eval_vqa \
             --SAMPLED_FRAMES_PER_SEC $FPS_PARAM \
             --model_id "$SELECTED_MODEL" \
             --data_path "$DATA_PATH" \
             --answer_path "$ANSWER_PATH" \
             --question_file "$QUESTION_FILE" \
             --experiment_name "$EXP_NAME"
+
+        break
     done
 done

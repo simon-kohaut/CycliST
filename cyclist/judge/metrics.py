@@ -17,7 +17,7 @@ def compute_count_metrics(results):
     abs_error = 0
 
     for result in results:
-        response = result['response']['body']['choices']['message']['content']
+        response = result['response']['body']['choices'][0]['message']['content']
 
         try:
             regex = r'\{[\s\S]*?\}'
@@ -71,7 +71,7 @@ def compute_bool_metrics(results):
     hits = 0
 
     for result in results:
-        response = result['response']['body']['choices']['message']['content']
+        response = result['response']['body']['choices'][0]['message']['content']
 
         try:
             regex = r'\{[\s\S]*?\}'
@@ -113,7 +113,7 @@ def compute_attribute_metrics(results):
     hits = 0
 
     for result in results:
-        response = result['response']['body']['choices']['message']['content']
+        response = result['response']['body']['choices'][0]['message']['content']
 
         try:
             regex = r'\{[\s\S]*?\}'
@@ -237,7 +237,7 @@ def compute_match_metrics(results, gt_objects, responses):
     evaluated = 0
 
     for idx, (result, gtobjs) in enumerate(zip(results, gt_objects)):
-        response = result['response']['body']['choices']['message']['content']
+        response = result['response']['body']['choices'][0]['message']['content']
 
         try:
             regex = r'(\{\s*\"mapped_objects\"\s*:\s*\[.*?\]\s*\})'

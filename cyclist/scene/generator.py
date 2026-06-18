@@ -63,7 +63,7 @@ class Generator:
 
         # Autocomplete what has been provided beforehand
         # So the user can decide some guarantees
-        predetermined = deepcopy(self.scene_config["objects"])
+        predetermined = deepcopy(self.scene_config.get("objects", []))
         self.scene_config["objects"] = []
         for object_config in predetermined:
             print(f"Autocomplete pre-determined object with {object_config} ...")
@@ -84,7 +84,7 @@ class Generator:
             )
 
         print(
-            f"Generate {self.scene_config["number_of_clutter_objects"]} clutter objects."
+            f"Generate {self.scene_config['number_of_clutter_objects']} clutter objects."
         )
         for _ in range(self.scene_config["number_of_clutter_objects"]):
             print(f"Generate clutter object ...")

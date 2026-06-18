@@ -4,8 +4,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import json
 from pathlib import Path
 
-from query_sglang import query_judge_batched
-from metrics import compute_count_metrics, compute_bool_metrics, compute_attribute_metrics
+from cyclist.judge.query_sglang import query_judge_batched
+from cyclist.judge.metrics import compute_count_metrics, compute_bool_metrics, compute_attribute_metrics
 
 _PROMPTS_DIR = Path(__file__).parent.parent.parent / "assets" / "prompts"
 
@@ -23,24 +23,24 @@ with open(_PROMPTS_DIR / "vqa_prompt_attribute.txt") as f:
 base_path = "output/eval/answers"
 
 templates_desc_existential = [
-    'questions_existential_descriptive_attributes',
-    'questions_existential_descriptive_relate',
-    'questions_existential_descriptive_compare',
+    'existential_descriptive_attributes',
+    'existential_descriptive_relate',
+    'existential_descriptive_compare',
 ]
 templates_desc_universal = [
-    'questions_universal_descriptive_attributes',
-    'questions_universal_descriptive_relate',
-    'questions_universal_descriptive_compare',
+    'universal_descriptive_attributes',
+    'universal_descriptive_relate',
+    'universal_descriptive_compare',
 ]
 templates_cyclic = [
-    'questions_cycle_representative_clockwise',
-    'questions_cycle_representative_orbit',
-    'questions_cycle_representative_transition',
+    'cycle_representative_clockwise',
+    'cycle_representative_orbit',
+    'cycle_representative_transition',
 ]
 templates_numeric = [
-    'questions_counting_cycles',
-    'questions_counting_frequency',
-    'questions_counting_occurence',
+    'counting_cycles',
+    'counting_frequency',
+    'counting_occurence',
 ]
 templates = templates_desc_existential + templates_desc_universal + templates_cyclic + templates_numeric
 
