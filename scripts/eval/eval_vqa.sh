@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_path="$(cd "$(dirname "$0")/../.." && pwd)"
+base_path="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 MODEL_PARAM=1
 DATASET_PARAM="unicycle"

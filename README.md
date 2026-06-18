@@ -7,6 +7,8 @@
     <a href="https://huggingface.co/datasets/AIML-TUDA/CycliST"><img src="https://img.shields.io/badge/HuggingFace-Dataset-FFD21E.svg?logo=huggingface" alt="Dataset"></a>
 </p>
 
+This is the official GitHub repository for the paper **CycliST: A Video Language Model Benchmark for Reasoning on Cyclical State Transitions**, Simon Kohaut, Daniel Ochs, Shun Zhang, Benedict Flade, Julian Eggert, Kristian Kersting, and Devendra Singh Dhami, DMLR 2026.
+
 CycliST is a synthetic video benchmark for evaluating vision-language models (VLMs) on **cyclical state transitions**. It generates 3D-rendered scenes with cyclic motion patterns (orbits, linear motion, rotations, attribute changes), produces structured question-answer pairs about those cycles, and evaluates VLMs on these.
 
 The pipeline has four stages:

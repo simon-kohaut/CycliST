@@ -96,7 +96,7 @@ parser.add_argument('-t', '--templates', nargs='+', default=[])
 
 
 # Misc
-parser.add_argument('--reset_counts_every', default=250, type=int,
+parser.add_argument('--reset_counts_every', default=1000, type=int,
     help="How often to reset template and answer counts. Higher values will " +
          "result in flatter distributions over templates and answers, but " +
          "will result in longer runtimes.")

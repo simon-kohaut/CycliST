@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_path="$(cd "$(dirname "$0")/../.." && pwd)"
+base_path="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 universal_templates=("universal_descriptive_attributes" "universal_descriptive_compare" "universal_descriptive_relate")
 existential_templates=("existential_descriptive_attributes" "existential_descriptive_compare" "existential_descriptive_relate")
@@ -13,11 +13,12 @@ template_selection=("${universal_templates[@]}" "${existential_templates[@]}" "$
 
 for split in "train" "test" "val"
 do
-    for dataset in "unicycle" # "bicycle" "tricycle" "unicycle_cluttered" "nightrider"
+    for dataset in "unicycle" "bicycle" "tricycle" "unicycle_cluttered" "nightrider"
     do
         for template in "${template_selection[@]}"
         do
             echo "Generating questions for template: $template, dataset: $dataset, split: $split"
+            mkdir -p "$base_path/output/questions/${dataset}/${split}"
             python3 "$base_path/cyclist/questions/generate_questions.py" \
                 --synonyms_json "$base_path/assets/question_templates/synonyms.json" \
                 --cyclic_json "$base_path/assets/question_templates/cyclic.json" \

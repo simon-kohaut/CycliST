@@ -170,6 +170,10 @@ cython_debug/
 
 #output folders
 output/*
+!output/scenes/
+!output/videos/
+!output/questions/
+!output/eval/
 data/
 !*/eval/data/
 sglang_storage/
