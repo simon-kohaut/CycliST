@@ -176,5 +176,6 @@ sglang_storage/
 batch_requests/
 hfcache/
 visualisations/*
+offset.json
 
 spin_up_containers.sh

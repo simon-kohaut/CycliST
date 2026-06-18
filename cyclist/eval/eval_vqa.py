@@ -5,11 +5,11 @@ from torch.utils.data import DataLoader
 import torch
 from tqdm import tqdm
 
-from utils.load_env_vars import load_env
+from cyclist.eval.utils.load_env_vars import load_env
 load_env()
 
-from data.model_wrapper import load_model, BaseModelWrapper, GeminiAPIWrapper
-from data.dataloader import CyListVQADataset
+from cyclist.eval.data.model_wrapper import load_model, BaseModelWrapper, GeminiAPIWrapper
+from cyclist.eval.data.dataloader import CyListVQADataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--SAMPLED_FRAMES_PER_SEC', type=int, required=True,
@@ -38,7 +38,8 @@ def eval_vqa(args):
     cyc_dataset = CyListVQADataset(args.data_path, args.question_file,
                                    FPS=32, SAMPLED_FRAMES_PER_SEC=args.SAMPLED_FRAMES_PER_SEC,
                                    return_file_path=return_file_path)
-    cyc_dataloader = DataLoader(cyc_dataset, batch_size=4, shuffle=True, num_workers=0)
+    batch_size = 2 if args.SAMPLED_FRAMES_PER_SEC > 16 else 4
+    cyc_dataloader = DataLoader(cyc_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 
     if args.verbose and not return_file_path:
         for data in cyc_dataloader:

@@ -4,8 +4,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import json
 from pathlib import Path
 
-from query_sglang import query_judge_su_batched
-from metrics import compute_match_metrics
+from cyclist.judge.query_sglang import query_judge_su_batched
+from cyclist.judge.metrics import compute_match_metrics
 
 _PROMPTS_DIR = Path(__file__).parent.parent.parent / "assets" / "prompts"
 

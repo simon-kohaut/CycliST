@@ -1,9 +1,7 @@
 import pandas as pd
-import numpy as np
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from openai import OpenAI
-import time
 import json
-import os
 from pathlib import Path
 
 
@@ -36,11 +34,9 @@ def query_judge_llama3(pred, gt, max_tokens=700, judge_prompt=""):
 
 def query_judge_batched(answer_csv, judge_prompt):
     """
-    Receives a csv file with predictions and groundtruths and queries the judge model in batch using the OpenAI API.
+    Reads a CSV of predictions and queries the SGLang judge concurrently via chat completions.
+    All rows are submitted in parallel (matching the throughput of the old batch API).
     """
-    last_idx = 0
-    results_all_chunks = []
-
     client = OpenAI(base_url="http://127.0.0.1:30000/v1", api_key="None")
 
     print("Evaluating", answer_csv)
@@ -48,78 +44,30 @@ def query_judge_batched(answer_csv, judge_prompt):
     df['pred'] = df['pred'].apply(lambda x: x if len(x) <= 10000 else x[:10000])
 
     offset = read_and_update_offset(len(df))
+    base_idx = offset - len(df)
 
-    batch_size = len(df)
-    for chunk_idx, chunk in enumerate(np.array_split(df, int(len(df)/batch_size))):
+    rows = [(i, str(r['pred']), str(r['gt_answer'])) for i, (_, r) in enumerate(df.iterrows())]
 
-        pred = chunk['pred']
-        gt_answer = chunk['gt_answer']
+    def call_one(i, p, gt):
+        msgs = [
+            {"role": "system", "content": "You are a helpful AI assistant helping me map the predictions of a model to a json."},
+            {"role": "user", "content": judge_prompt.format(p, gt)},
+        ]
+        resp = client.chat.completions.create(model="default", messages=msgs, temperature=0, max_tokens=200)
+        return i, resp.choices[0].message.content, msgs
 
-        requests = []
-        for idx, (p, gt) in enumerate(zip(pred, gt_answer)):
-            requests.append(
-                {
-                    "custom_id": "request-{}".format(offset + idx),
-                    "method": "POST",
-                    "url": "/chat/completions",
-                    "body": {
-                        "model": "meta-llama/Meta-Llama-3-70B-Instruct",
-                        "messages": [
-                            {"role": "system", "content": "You are a helpful AI assistant helping me map the predictions of a model to a json."},
-                            {"role": "user", "content": judge_prompt.format(p, gt)},
-                        ],
-                        "max_tokens": 200,
-                    },
-                }
-            )
+    results = [None] * len(rows)
+    requests = [None] * len(rows)
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        futures = {executor.submit(call_one, i, p, gt): i for i, p, gt in rows}
+        for future in as_completed(futures):
+            i, content, msgs = future.result()
+            custom_id = f"request-{base_idx + i}"
+            results[i] = {"custom_id": custom_id, "response": {"body": {"choices": [{"message": {"content": content}}]}}}
+            requests[i] = {"custom_id": custom_id, "method": "POST", "url": "/chat/completions",
+                           "body": {"model": "meta-llama/Meta-Llama-3-70B-Instruct", "messages": msgs, "max_tokens": 200}}
 
-        input_file_path = "batch_requests/batch_requests_{}_{}.jsonl".format(chunk_idx, np.random.randint(100000))
-        os.makedirs(os.path.dirname(input_file_path), exist_ok=True)
-
-        with open(input_file_path, "w") as f:
-            for req in requests:
-                f.write(json.dumps(req) + "\n")
-
-        with open(input_file_path, "rb") as f:
-            file_response = client.files.create(file=f, purpose="batch")
-
-        batch_response = client.batches.create(
-            input_file_id=file_response.id,
-            endpoint="/v1/chat/completions",
-            completion_window="24h",
-        )
-        print("FILE response ID", file_response.id)
-        print(f"Batch job created with ID: {batch_response.id}")
-
-        while batch_response.status not in ["completed", "failed", "cancelled"]:
-            time.sleep(3)
-            print(f"Batch job status: {batch_response.status}...trying again in 5 seconds...")
-            batch_response = client.batches.retrieve(batch_response.id)
-
-        if batch_response.status == "completed":
-            print("Batch job completed successfully!")
-            print(f"Request counts: {batch_response.request_counts}")
-
-            print("loading data from file", batch_response.output_file_id)
-            result_file_id = batch_response.output_file_id
-            file_response = client.files.content(result_file_id)
-            result_content = file_response.read().decode("utf-8")
-
-            results = [
-                json.loads(line) for line in result_content.split("\n") if line.strip() != ""
-            ]
-            results_all_chunks.extend(results)
-
-            print("Cleaning up files...")
-            client.files.delete(result_file_id)
-        else:
-            print(f"Batch job failed with status: {batch_response.status}")
-            if hasattr(batch_response, "errors"):
-                print(f"Errors: {batch_response.errors}")
-
-        last_idx += idx
-
-    return results_all_chunks, requests
+    return results, requests
 
 
 def prepare_scene_config(file_name, scenes_base_path="output/scenes"):
@@ -159,88 +107,40 @@ def prepare_scene_config(file_name, scenes_base_path="output/scenes"):
 
 def query_judge_su_batched(answer_csv, judge_prompt):
     """
-    Receives a csv file with predictions and queries the judge model in batch using the OpenAI API.
+    Reads a CSV of scene-understanding predictions and queries the SGLang judge concurrently.
+    All rows are submitted in parallel (matching the throughput of the old batch API).
     Returns results, requests, gt_objects, and predictions.
     """
-    last_idx = 0
-    results_all_chunks = []
-
     client = OpenAI(base_url="http://127.0.0.1:30000/v1", api_key="None")
 
     print("Evaluating", answer_csv)
     df = pd.read_csv(answer_csv, sep=";", names=['query', 'pred', 'scene_config'])
 
     offset = read_and_update_offset(len(df))
+    base_idx = offset - len(df)
 
-    batch_size = len(df)
-    for chunk_idx, chunk in enumerate(np.array_split(df, int(len(df)/batch_size))):
+    rows = [(i, str(r['pred'])) for i, (_, r) in enumerate(df.iterrows())]
 
-        pred = chunk['pred']
+    def call_one(i, p):
+        msgs = [
+            {"role": "system", "content": "You are a helpful AI assistant helping me map the predictions of a model to a json."},
+            {"role": "user", "content": judge_prompt.format(p)},
+        ]
+        resp = client.chat.completions.create(model="default", messages=msgs, temperature=0, max_tokens=4000)
+        return i, resp.choices[0].message.content, msgs
 
-        requests = []
-        for idx, p in enumerate(pred):
-            requests.append(
-                {
-                    "custom_id": "request-{}".format(offset + idx),
-                    "method": "POST",
-                    "url": "/chat/completions",
-                    "body": {
-                        "model": "meta-llama/Meta-Llama-3-70B-Instruct",
-                        "messages": [
-                            {"role": "system", "content": "You are a helpful AI assistant helping me map the predictions of a model to a json."},
-                            {"role": "user", "content": judge_prompt.format(p)},
-                        ],
-                        "max_tokens": 4000,
-                    },
-                }
-            )
-
-        input_file_path = "batch_requests/batch_requests_{}_{}.jsonl".format(chunk_idx, np.random.randint(100000))
-        os.makedirs(os.path.dirname(input_file_path), exist_ok=True)
-
-        with open(input_file_path, "w") as f:
-            for req in requests:
-                f.write(json.dumps(req) + "\n")
-
-        with open(input_file_path, "rb") as f:
-            file_response = client.files.create(file=f, purpose="batch")
-
-        batch_response = client.batches.create(
-            input_file_id=file_response.id,
-            endpoint="/v1/chat/completions",
-            completion_window="24h",
-        )
-        print("FILE response ID", file_response.id)
-        print(f"Batch job created with ID: {batch_response.id}")
-
-        while batch_response.status not in ["completed", "failed", "cancelled"]:
-            time.sleep(3)
-            print(f"Batch job status: {batch_response.status}...trying again in 5 seconds...")
-            batch_response = client.batches.retrieve(batch_response.id)
-
-        if batch_response.status == "completed":
-            print("Batch job completed successfully!")
-            print(f"Request counts: {batch_response.request_counts}")
-
-            print("loading data from file", batch_response.output_file_id)
-            result_file_id = batch_response.output_file_id
-            file_response = client.files.content(result_file_id)
-            result_content = file_response.read().decode("utf-8")
-
-            results = [
-                json.loads(line) for line in result_content.split("\n") if line.strip() != ""
-            ]
-            results_all_chunks.extend(results)
-
-            print("Cleaning up files...")
-            client.files.delete(result_file_id)
-        else:
-            print(f"Batch job failed with status: {batch_response.status}")
-            if hasattr(batch_response, "errors"):
-                print(f"Errors: {batch_response.errors}")
-
-        last_idx += idx
+    results = [None] * len(rows)
+    requests = [None] * len(rows)
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        futures = {executor.submit(call_one, i, p): i for i, p in rows}
+        for future in as_completed(futures):
+            i, content, msgs = future.result()
+            custom_id = f"request-{base_idx + i}"
+            results[i] = {"custom_id": custom_id, "response": {"body": {"choices": [{"message": {"content": content}}]}}}
+            requests[i] = {"custom_id": custom_id, "method": "POST", "url": "/chat/completions",
+                           "body": {"model": "meta-llama/Meta-Llama-3-70B-Instruct", "messages": msgs, "max_tokens": 4000}}
 
     objects_list = [prepare_scene_config(scene_config) for scene_config in df['scene_config'].values]
+    pred = df['pred']
 
-    return results_all_chunks, requests, objects_list, pred
+    return results, requests, objects_list, pred
